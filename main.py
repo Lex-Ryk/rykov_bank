@@ -1,7 +1,9 @@
-from src import masks
+from src import widget
 
-card_number: str = input()
-account_number: str = input()
 
-print(masks.get_mask_card_number(card_number))
-print(masks.get_mask_account(account_number))
+print(widget.mask_account_card('Visa Platinum 7000792289606361'))
+print(widget.mask_account_card('Maestro 7000792289606361'))
+print(widget.mask_account_card('Счет 73654108430135874305'))
+print(widget.mask_account_card('Счет рпав орпа 73654108430135874305'))
+print(widget.mask_account_card('73654108430135874305'))
+print(widget.mask_account_card(''))
