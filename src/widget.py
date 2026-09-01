@@ -12,7 +12,7 @@ def mask_account_card(info_card: str) -> str:
     if quantity_item_list == 3 or quantity_item_list == 2:
         mask_info_card += " ".join(list_info_card[:-1])
     else:
-        return "Неверно введены данные карты!"
+        raise ValueError("Неверно введены данные карты или счёта!")
 
     if list_info_card[0] == "Счет":
         mask_info_card += " " + masks.get_mask_account(list_info_card[-1])
@@ -24,6 +24,10 @@ def mask_account_card(info_card: str) -> str:
 
 def get_date(date_string: str) -> str:
     """Функция форматирования даты в привычный формат"""
+
+    if not date_string or not isinstance(date_string, str) or not date_string.strip():
+        raise ValueError("Отсутствует или пустая строка с датой")
+
     dt_object = datetime.fromisoformat(date_string)
 
     return dt_object.strftime("%d.%m.%Y")

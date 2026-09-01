@@ -1,7 +1,9 @@
 import pytest
+
 from src.masks import get_mask_card_number, get_mask_account
 
 
+# Тесты для функции get_mask_card_number
 @pytest.mark.parametrize('card_number, expected', [('7000792289606361', '7000 79** **** 6361'),
                                                    ('0000000000000000', '0000 00** **** 0000')])
 def test_get_mask_card_number(card_number, expected):
