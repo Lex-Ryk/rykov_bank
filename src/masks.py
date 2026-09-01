@@ -17,8 +17,15 @@ def get_mask_card_number(card_number: str) -> str:
 
 def get_mask_account(account_number: str) -> str:
     """Функция, которая принимает на вход номер счета и возвращает его маску."""
+
+    if not isinstance(account_number, str):
+        raise TypeError("Ошибка типа данных")
+
+    if not account_number.isdigit():
+        raise ValueError("Неккоректные символы в номере карты")
+
     if len(account_number) < 4:
-        return "Слишком мало цифр номера счета!"
+        raise ValueError("Слишком мало цифр в номере счёта для маскировки!")
 
     mask_account = "**" + account_number[-4:]
 
