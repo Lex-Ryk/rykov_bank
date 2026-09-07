@@ -7,8 +7,11 @@ def filter_by_currency(list_transactions: list[dict], currency: str):
 
 
 def transaction_descriptions(list_transactions: list[dict]):
-    pass
+    descriptions = (
+        transaction["description"] for transaction in list_transactions if 'description' in transaction
+    )
 
+    return descriptions
 
 def card_number_generator(start: int, end: int):
     pass

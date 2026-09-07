@@ -1,6 +1,8 @@
+from os import device_encoding
+
 import pytest
 
-from src.generators import filter_by_currency
+from src.generators import filter_by_currency, transaction_descriptions
 
 
 def test_filter_by_currency(data_transactions):
@@ -52,3 +54,25 @@ def test_filter_by_currency_without_transactions_and_currency(data_transactions)
         next(filter_by_currency(data_transactions, ''))
 
 
+def test_transaction_descriptions(data_transactions):
+    descriptions = transaction_descriptions(data_transactions)
+
+    assert next(descriptions) == 'Перевод организации'
+    assert next(descriptions) == 'Перевод со счета на счет'
+    assert next(descriptions) == 'Перевод с карты на карту'
+    assert next(descriptions) == 'Перевод со счета на счет'
+    assert next(descriptions) == 'Перевод организации'
+
+
+def test_transaction_descriptions_without_value_description():
+    assert next(transaction_descriptions([{'description': ''}])) == ''
+
+
+def test_transaction_descriptions_without_key_description():
+    with pytest.raises(StopIteration):
+        next(transaction_descriptions([{'state': 'EXECUTED'}]))
+
+
+def test_transaction_description_without_transactions():
+    with pytest.raises(StopIteration):
+        next(transaction_descriptions(list()))
