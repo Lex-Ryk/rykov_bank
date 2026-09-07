@@ -80,6 +80,7 @@ def data_dictionaries_sort_by_date_with_same_date_revers():
         {"date": "2020-07-03T18:35:29.512364", "id": 234567654, "state": "CANCELED"},
     ]
 
+
 @pytest.fixture
 def data_transactions():
     return [
@@ -87,75 +88,45 @@ def data_transactions():
             "id": 939719570,
             "state": "EXECUTED",
             "date": "2018-06-30T02:08:58.425572",
-            "operationAmount": {
-                "amount": "9824.07",
-                "currency": {
-                    "name": "USD",
-                    "code": "USD"
-                }
-            },
+            "operationAmount": {"amount": "9824.07", "currency": {"name": "USD", "code": "USD"}},
             "description": "Перевод организации",
             "from": "Счет 75106830613657916952",
-            "to": "Счет 11776614605963066702"
+            "to": "Счет 11776614605963066702",
         },
         {
             "id": 342264238,
             "state": "EXECUTED",
             "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {
-                "amount": "7914.93",
-                "currency": {
-                    "name": "RUB",
-                    "code": "RUB"
-                }
-            },
+            "operationAmount": {"amount": "7914.93", "currency": {"name": "RUB", "code": "RUB"}},
             "description": "Перевод со счета на счет",
             "from": "Счет 2345645243227258542",
-            "to": "Счет 7654667383060284188"
+            "to": "Счет 7654667383060284188",
         },
         {
             "id": 142264268,
             "state": "EXECUTED",
             "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {
-                "amount": "749114.93",
-                "currency": {
-                    "name": "RUB",
-                    "code": "RUB"
-                }
-            },
+            "operationAmount": {"amount": "749114.93", "currency": {"name": "RUB", "code": "RUB"}},
             "description": "Перевод с карты на карту",
             "from": "Счет 7876548645243227258542",
-            "to": "Счет 876543667383060284188"
+            "to": "Счет 876543667383060284188",
         },
         {
             "id": 142264268,
             "state": "EXECUTED",
             "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {
-                "amount": "79114.93",
-                "currency": {
-                    "name": "USD",
-                    "code": "USD"
-                }
-            },
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "USD", "code": "USD"}},
             "description": "Перевод со счета на счет",
             "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
+            "to": "Счет 75651667383060284188",
         },
         {
             "id": 142264268,
             "state": "EXECUTED",
             "date": "2019-04-04T23:20:05.206878",
-            "operationAmount": {
-                "amount": "79114.93",
-                "currency": {
-                    "name": "EUR",
-                    "code": "EUR"
-                }
-            },
+            "operationAmount": {"amount": "79114.93", "currency": {"name": "EUR", "code": "EUR"}},
             "description": "Перевод организации",
             "from": "Счет 19708645243227258542",
-            "to": "Счет 75651667383060284188"
-        }
+            "to": "Счет 75651667383060284188",
+        },
     ]
