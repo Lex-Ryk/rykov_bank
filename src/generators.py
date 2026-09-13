@@ -1,5 +1,5 @@
-from typing import Any
 from collections.abc import Iterable
+from typing import Any
 
 
 def filter_by_currency(list_transactions: list[dict[str, Any]], currency: str) -> Iterable[dict[str, Any]]:
