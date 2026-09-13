@@ -9,29 +9,33 @@ def log(filename=None):
             try:
                 result = func(*args, **kwargs)
                 status = 'ok'
-                write_log(filename=filename, func_name=func_name, status=status)
+                end_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                write_log(start_time, end_time, filename=filename, func_name=func_name, status=status)
                 return result
             except Exception as e:
                 status = f'{type(e).__name__}: {str(e)}. Inputs: {args}, {kwargs}'
-                write_log(filename=filename, func_name=func_name, status=status)
+                end_time = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                write_log(start_time, end_time, filename=filename, func_name=func_name, status=status)
                 raise
         return inner
     return wrapper
 
 
 def write_log(
+        start_time=None,
+        end_time=None,
         *,
         filename=None,
         func_name=None,
-        status=None):
+        status=None,):
     """Вспомогательная функция, которая отвечает за запись логов в файл или вывод их в консоль"""
     log_message = f'{func_name} {status}'
     if filename:
         try:
             with open(filename, 'a', encoding='utf-8') as file:
-                file.write(log_message + '\n')
+                file.write(f'[{start_time} -> {end_time}] {log_message}\n')
         except IOError as e:
             print(f"Ошибка записи в файл {filename}: {e}")
-            print(log_message)
+            print(f'[{start_time} -> {end_time}] {log_message}')
     else:
-        print(log_message)
+        print(f'[{start_time} -> {end_time}] {log_message}')

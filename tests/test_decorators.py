@@ -1,4 +1,5 @@
 import pytest
+import re
 
 from src.decorators import log, write_log
 
@@ -11,7 +12,12 @@ def test_log(capsys):
     my_func(2, 3)
 
     captured = capsys.readouterr()
-    assert captured.out == 'my_func ok\n'
+
+    pattern = re.compile(
+        r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} -> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\] my_func ok\n"
+    )
+
+    assert pattern.search(captured.out) is not None
 
 
 def test_log_error():
@@ -34,7 +40,11 @@ def test_correct_log_to_file(tmp_path):
 
     content = log_file.read_text(encoding="utf-8")
 
-    assert content == 'test_func ok\n'
+    pattern = re.compile(
+        r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} -> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\] test_func ok\n"
+    )
+
+    assert pattern.search(content) is not None
 
 
 def test_error_log_to_file(tmp_path):
@@ -51,15 +61,19 @@ def test_error_log_to_file(tmp_path):
 
     content = log_file.read_text(encoding='utf-8')
 
-    assert content == 'test_func ValueError: Unforeseen error. Inputs: (1, 2), {}\n'
+    pattern = re.compile(
+        r"\[\d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2} -> \d{4}-\d{2}-\d{2} \d{2}:\d{2}:\d{2}\]"
+        r" test_func ValueError: Unforeseen error\. Inputs: \(1, 2\), \{\}\n"
+    )
+
+    assert pattern.search(content) is not None
 
 
 def test_write_log_to_console(capsys):
     write_log(func_name='Test', status='Passed')
 
     captured = capsys.readouterr()
-    assert captured.out == 'Test Passed\n'
-    assert captured.err == ""
+    assert captured.out == f'[{None} -> {None}] Test Passed\n'
 
 
 def test_write_log_to_file(tmp_path):
@@ -73,7 +87,7 @@ def test_write_log_to_file(tmp_path):
 
     assert log_file.exists()
     content = log_file.read_text(encoding="utf-8")
-    assert content == "test_func Passed\n"
+    assert content == f"[{None} -> {None}] test_func Passed\n"
 
 
 def test_write_log_io_error(tmp_path, capsys):
