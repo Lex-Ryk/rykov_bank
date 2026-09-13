@@ -9,19 +9,19 @@ def log(filename=None):
             try:
                 result = func(*args, **kwargs)
                 status = 'ok'
-                write_log(filename, func_name=func_name, status=status)
+                write_log(filename=filename, func_name=func_name, status=status)
                 return result
             except Exception as e:
                 status = f'{type(e).__name__}: {str(e)}. Inputs: {args}, {kwargs}'
-                write_log(filename, status=status, func_name=func_name)
+                write_log(filename=filename, func_name=func_name, status=status)
                 raise
         return inner
     return wrapper
 
 
 def write_log(
-        filename,
         *,
+        filename=None,
         func_name=None,
         status=None):
     """Вспомогательная функция, которая отвечает за запись логов в файл или вывод их в консоль"""
