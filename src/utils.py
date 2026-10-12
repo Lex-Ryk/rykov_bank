@@ -2,7 +2,7 @@ import json
 from typing import Any
 
 
-def get_data_transactions(path: str) -> list[dict[Any, Any]]:
+def get_data_transactions(path: str) -> list[dict[str, Any]]:
     """ Получение списка словарей с данными о финансовых транзакциях """
     try:
         with open(path, encoding='utf-8-sig') as file_transactions:
