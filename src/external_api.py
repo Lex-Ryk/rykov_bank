@@ -4,13 +4,8 @@ from dotenv import load_dotenv
 from typing import Any
 
 
-load_dotenv()
-
-headers = {
-    "apikey": f'{os.getenv('API_KEY')}'
-}
-
-def get_amount_transactions(transaction: dict[str, Any]) -> float | bool:
+def get_amount_transaction(transaction: dict[str, Any]) -> float | bool:
+    """ Функция конвертации валюты """
     url = "https://api.apilayer.com/exchangerates_data/convert"
     try:
         currency = transaction['operationAmount']["currency"]["code"]
@@ -24,11 +19,17 @@ def get_amount_transactions(transaction: dict[str, Any]) -> float | bool:
         return False
 
     if currency == 'RUB':
-        return amount
+        return float(amount)
     payload = {
         'amount': amount,
         'from': currency,
         'to': 'RUB'
+    }
+
+    load_dotenv()
+
+    headers = {
+        "apikey": f"{os.getenv('API_KEY')}"
     }
 
     try:
@@ -42,4 +43,5 @@ def get_amount_transactions(transaction: dict[str, Any]) -> float | bool:
             return False
     except requests.exceptions.RequestException:
         print('Произошла ошибка. Пожалуйста, повторите попытку позже.')
+        return False
 
