@@ -1,14 +1,11 @@
 import logging
 
-
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    filename='logs/masks.log',  # Запись логов в файл
-                    filemode='w',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    encoding='utf-8')
-
 logger = logging.getLogger(__name__)
+masks_file_handler = logging.FileHandler('logs/masks.log', encoding='utf-8', mode='w')
+file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+masks_file_handler.setFormatter(file_formatter)
+logger.addHandler(masks_file_handler)
+logger.setLevel(logging.DEBUG)
 
 
 def get_mask_card_number(card_number: str) -> str:
@@ -19,9 +16,9 @@ def get_mask_card_number(card_number: str) -> str:
     if not isinstance(card_number, str):
         logger.error(f"Ошибка типа данных: тип card number - {type(card_number)} not string")
     elif not card_number.isdigit():
-        logger.error(f"Некорректные символы в номере карты.")
+        logger.error("Некорректные символы в номере карты.")
     elif len(card_number) != 16:
-        logger.error(f"Слишком много или слишком мало цифр в номере карты!")
+        logger.error("Слишком много или слишком мало цифр в номере карты!")
     else:
         mask_card_number = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[-4:]
         logger.info(f'Номер карты успешно зашифрован: {mask_card_number}')
@@ -43,6 +40,5 @@ def get_mask_account(account_number: str) -> str:
     else:
         mask_account = "**" + account_number[-4:]
         logger.info(f'Номер счёта успешно зашифрован: {mask_account}')
-
 
     return mask_account

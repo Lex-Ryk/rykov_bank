@@ -1,16 +1,13 @@
 import json
-from typing import Any
 import logging
-
-
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    filename='logs/masks.log',  # Запись логов в файл
-                    filemode='w',
-                    datefmt='%Y-%m-%d %H:%M:%S',
-                    encoding='utf-8')
+from typing import Any
 
 logger = logging.getLogger(__name__)
+masks_file_handler = logging.FileHandler('logs/utils.log', encoding='utf-8', mode='w')
+file_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s', datefmt='%Y-%m-%d %H:%M:%S')
+masks_file_handler.setFormatter(file_formatter)
+logger.addHandler(masks_file_handler)
+logger.setLevel(logging.DEBUG)
 
 
 def get_data_transactions(path: str) -> list[dict[str, Any]]:
