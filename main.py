@@ -1,7 +1,4 @@
-from src.external_api import get_amount_transaction
-from src.utils import get_data_transactions
+from src.reading_transactions import read_csv_file, read_excel_file
 
-
-transactions = get_data_transactions('data/operations.json')
-
-print(get_amount_transaction(transactions[2]))
+print(read_csv_file('data/transactions.csv'))
+print(read_excel_file('data/transactions_excel.xlsx'))
