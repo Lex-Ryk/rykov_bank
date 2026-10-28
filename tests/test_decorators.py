@@ -2,7 +2,10 @@ import re
 
 import pytest
 
-from src.decorators import log, write_log
+from src.decorators import (
+    log,
+    write_log,
+)
 
 
 def test_log(capsys):

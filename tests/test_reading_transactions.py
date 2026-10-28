@@ -1,9 +1,15 @@
-from unittest.mock import Mock, patch
+from unittest.mock import (
+    Mock,
+    patch,
+)
 
 import pandas as pd
 import pytest
 
-from src.reading_transactions import read_csv_file, read_excel_file
+from src.reading_transactions import (
+    read_csv_file,
+    read_excel_file,
+)
 
 
 @pytest.fixture
