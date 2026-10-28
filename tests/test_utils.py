@@ -1,5 +1,6 @@
+from unittest.mock import mock_open, patch
+
 from src.utils import get_data_transactions
-from unittest.mock import patch, mock_open
 
 
 @patch("builtins.open", new_callable=mock_open)
