@@ -1,4 +1,7 @@
-from src.reading_transactions import read_csv_file, read_excel_file
+from src.masks import get_mask_account, get_mask_card_number
+from src.utils import get_data_transactions
 
-print(read_csv_file('data/transactions.csv'))
-print(read_excel_file('data/transactions_excel.xlsx'))
+
+print(get_data_transactions('data/operation.json'))
+get_mask_card_number('35645365367')
+get_mask_account('sf4655757')
