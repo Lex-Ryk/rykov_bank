@@ -1,6 +1,12 @@
 from datetime import datetime
 from functools import wraps
-from typing import Any, Callable, Optional, TypeVar, cast
+from typing import (
+    Any,
+    Callable,
+    Optional,
+    TypeVar,
+    cast,
+)
 
 F = TypeVar("F", bound=Callable[..., Any])
 
